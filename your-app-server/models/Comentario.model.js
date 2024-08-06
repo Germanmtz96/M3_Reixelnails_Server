@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const {Schema, model} = require("mongoose")
 
-const comentarioSchema = new mongoose.Schema({
+const comentarioSchema = new Schema({
   descripcion: {
     type: String,
     required: true,
@@ -13,6 +13,6 @@ const comentarioSchema = new mongoose.Schema({
 
 
 
-const Comentario = mongoose.model( "Comentario", comentarioSchema )
+const Comentario = model( "Comentario", comentarioSchema )
 
 module.exports = Comentario

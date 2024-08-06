@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const {Schema, model} = require("mongoose")
 
-const publicacionSchema = new mongoose.Schema({
+const publicacionSchema = new Schema({
     titulo: {
     type: String,
     required: true,
@@ -21,6 +21,6 @@ imagen :{
 
 
 
-const Publicacion = mongoose.model( "Publicacion", publicacionSchema )
+const Publicacion = model( "Publicacion", publicacionSchema )
 
 module.exports = Publicacion

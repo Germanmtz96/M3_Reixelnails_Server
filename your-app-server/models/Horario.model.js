@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const {Schema, model} = require("mongoose")
 
-const horarioSchema = new mongoose.Schema({
+const horarioSchema = new Schema({
     day: {
     type: Date,
     required: true,
@@ -21,6 +21,6 @@ const horarioSchema = new mongoose.Schema({
 
 
 
-const Horario = mongoose.model( "Horario", horarioSchema )
+const Horario = model( "Horario", horarioSchema )
 
 module.exports = Horario
