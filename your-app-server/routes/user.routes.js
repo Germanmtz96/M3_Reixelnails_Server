@@ -24,7 +24,7 @@ router.get("/", tokenValidation, async (req, res, next) => {
 
 // PATCH "/api/users/userId" => el usuario actualiza su tlf en el perfil
 
-router.patch("/:userId/tlf", async (req, res, next) => {
+router.patch("/:userId/tlf", tokenValidation, async (req, res, next) => {
 
     try {
       
@@ -44,7 +44,7 @@ router.patch("/:userId/tlf", async (req, res, next) => {
 
 // DELETE "/api/users/userId" => el usuario borra su cuenta
 
-router.delete("/:userId", async (req, res, next) => {
+router.delete("/:userId", tokenValidation, async (req, res, next) => {
     try {
       await User.findByIdAndDelete(req.params.userId)
       res.sendStatus(202)
