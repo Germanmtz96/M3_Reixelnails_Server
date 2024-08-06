@@ -32,20 +32,46 @@ User model
   username: {type: String, required: true, unique: true},
   email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  favs: [{type: Schema.Types.ObjectId,ref:'Game'}]
+  tlf: { type: Number, required: true}
 }
 ```
 
-Game model
+Horario model
 
 ```javascript
  {
-   title: {type: String, required: true},
-   type: {type: String, required: true},
-   image: {type: String, required: true},
-   apiId {type: Number, required: true},
-   status {type: String, enum: ["wishlist", "playing", "finished"]
+   day: { type: Date},
+   hora-start{ type: String},
+   hora-end{ type: String},
+ }
+```
+
+Comentario model
+
+```javascript
+ {
+   descripcion: {type: String, required: true},
    creator: {type: Schema.Types.ObjectId,ref:'User'},
+ }
+```
+
+Cita model
+
+```javascript
+ {
+   hueco-libre: {type: mongoose.Schema.Types.ObjectId,ref: 'Horarios', required: true},
+   creator: {type: Schema.Types.ObjectId,ref:'User'},
+ }
+```
+
+Publicacion model
+
+```javascript
+ {
+   titulo: {type: String, required: true},
+   like: {type: Number, default:0, type: Schema.Types.ObjectId ,ref:'User'},
+   comentarios: {type:[String], type: Schema.Types.ObjectId,ref:'User'},
+   imagen{ type: String, required: true}
  }
 ```
 
