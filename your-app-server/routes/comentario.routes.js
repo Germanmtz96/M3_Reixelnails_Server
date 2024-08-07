@@ -4,7 +4,7 @@ const Comentario = require("../models/Comentario.model")
 
 // POST "/api/comentarios" => el usuario crea un comentario
 
-router.post("/", tokenValidation, async (req, res, next) => {
+router.post("/publicacionId", tokenValidation, async (req, res, next) => {
   
     try {
         const {descripcion,creator} = req.body

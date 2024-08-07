@@ -62,7 +62,9 @@ router.post("/signup", async (req, res, next) => {
     await User.create({
       email,
       username,
-      password: hashPassword
+      password: hashPassword,
+      tlf
+
     })
 
     res.sendStatus(201)

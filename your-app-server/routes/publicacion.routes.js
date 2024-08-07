@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   
     try {
       
-      const response = await User.find()
+      const response = await Publicacion.find()
       res.json(response)
   
     } catch (error) {
@@ -21,7 +21,7 @@ router.get("/", async (req, res, next) => {
 
 // POST "/api/publicaciones" => el admin crea una nueva publicacion
 
-router.post("/", adminValidation, async (req, res, next) => {
+router.post("/", tokenValidation, adminValidation, async (req, res, next) => {
   
     try {
       
@@ -44,7 +44,7 @@ router.post("/", adminValidation, async (req, res, next) => {
 
 // DELETE "/api/publicaciones/:publicacionId" => el admin elimina una publicacion
 
-router.delete("/:publicacionId", adminValidation, async (req, res, next) => {
+router.delete("/:publicacionId", tokenValidation, adminValidation, async (req, res, next) => {
     try {
       await Publicacion.findByIdAndDelete(req.params.publicacionId)
       res.sendStatus(202)
@@ -59,7 +59,7 @@ router.get("/:publicacionId", tokenValidation, async (req, res, next) => {
   
     try {
       
-      const response = await User.findById(req.params.publicacionId)
+      const response = await Publicacion.findById(req.params.publicacionId)
       res.json(response)
   
     } catch (error) {
@@ -71,13 +71,12 @@ router.get("/:publicacionId", tokenValidation, async (req, res, next) => {
 
 // PATCH "/api/publicaciones/:publicacionId" => el usuario actualiza el boton de like
 
-router.patch("/:publicacionId", tokenValidation, async (req, res, next) => {
+router.patch("/:publicacionId/likes", tokenValidation, async (req, res, next) => {
 
     try {
       
-      const response = await Publicacion.findById(req.params.publicacionId)
       await Publicacion.findByIdAndUpdate(req.params.publicacionId, {
-        likes: !response.likes
+        $addToSet: { likes : req.payload._id}
       }, {new:true})
       res.sendStatus(202)
   
@@ -89,7 +88,7 @@ router.patch("/:publicacionId", tokenValidation, async (req, res, next) => {
 
 // PATCH "/api/publicaciones/:publicacionId" => el admin edita el titulo de la publicacion
 
-router.patch("/:publicacionId", adminValidation, async (req, res, next) => {
+router.patch("/:publicacionId/titulo", tokenValidation, adminValidation, async (req, res, next) => {
 
     try {
       

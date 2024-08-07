@@ -20,7 +20,7 @@ router.get("/", tokenValidation, async (req, res, next) => {
 
 // POST "/api/horarios" => el admin crea un horario
 
-router.post("/", adminValidation, async (req, res, next) => {
+router.post("/", tokenValidation, adminValidation, async (req, res, next) => {
   
     try {
         const {day,horaStart,cliente,servicio} = req.body
@@ -42,7 +42,7 @@ router.post("/", adminValidation, async (req, res, next) => {
 
 // PATCH "/api/horarios/:horarioId" => el admin edita un horario
 
-router.patch("/:horarioId", adminValidation, async (req, res, next) => {
+router.patch("/:horarioId", tokenValidation, adminValidation, async (req, res, next) => {
       
         try {
             await Horario.findByIdAndUpdate(req.params.horarioId, {
@@ -58,7 +58,7 @@ router.patch("/:horarioId", adminValidation, async (req, res, next) => {
 
 // DELETE "/api/horarios/:horarioId" => el admin borra un horario
 
-router.delete("/:horarioId", adminValidation, async (req, res, next) => {
+router.delete("/:horarioId", tokenValidation, adminValidation, async (req, res, next) => {
     try {
       await Horario.findByIdAndDelete(req.params.horarioId)
       res.sendStatus(202)
