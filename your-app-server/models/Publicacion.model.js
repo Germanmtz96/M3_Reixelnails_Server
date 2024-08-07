@@ -9,10 +9,6 @@ const publicacionSchema = new Schema({
     type: [Schema.Types.ObjectId], 
     ref:'User'
 },
-  comentarios: {
-    type: [Schema.Types.ObjectId],
-    ref:'Comentario' 
-},
 imagen :{ 
     type: String, 
     required: true

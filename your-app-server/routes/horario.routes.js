@@ -23,13 +23,11 @@ router.get("/", tokenValidation, async (req, res, next) => {
 router.post("/", tokenValidation, adminValidation, async (req, res, next) => {
   
     try {
-        const {day,horaStart,cliente,servicio} = req.body
+        const {day,horaStart} = req.body
 
       await Horario.create({
         day,
         horaStart,
-        cliente,
-        servicio
       })
       res.sendStatus(201)
 
@@ -62,6 +60,52 @@ router.delete("/:horarioId", tokenValidation, adminValidation, async (req, res, 
     try {
       await Horario.findByIdAndDelete(req.params.horarioId)
       res.sendStatus(202)
+    } catch (error) {
+      next(error)
+    }
+  })
+
+
+  // PATCH "/api/horarios/:horarioId/coger_cita => El usuario se añade a un horario de cita
+
+  router.patch("/:horarioId/coger_cita", tokenValidation, async (req, res, next) => {
+    
+    try {
+      await Horario.findByIdAndUpdate(req.params.horarioId, {
+
+        servicio: req.body.servicio,
+        cliente: req.payload._id
+
+      })
+      res.status(202).json({ message: "La cita ha sido correctamente agendada."})
+
+    } catch (error) {
+      next(error)
+    }
+  })
+
+
+  //PATCH "/api/horarios/:horarioId/quitar_cita" => El usuario se quita de un horario de cita
+
+  router.patch("/:horarioId/quitar_cita", tokenValidation, async (req, res, next) => {
+    
+    try {
+      const response = await Horario.findById(req.params.horarioId)
+
+       if(response.cliente === req.payload._id || req.payload.role === "admin"){ 
+
+        await Horario.findByIdAndUpdate(req.params.horarioId, {
+  
+          servicio : null,
+          cliente : null
+  
+        })
+        res.status(202).json({ message: "La cancelación de la cita fue exitosa."})
+ 
+      }else {
+        res.status(403).json({ message: "No tienes permiso para cancelar esta cita." });
+        }
+ 
     } catch (error) {
       next(error)
     }

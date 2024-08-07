@@ -1,4 +1,5 @@
 const {Schema, model} = require("mongoose")
+const Publicacion = require("./Publicacion.model")
 
 const comentarioSchema = new Schema({
   descripcion: {
@@ -8,7 +9,11 @@ const comentarioSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref:'User'
-}
+},
+  publicacion : {
+    type: Schema.Types.ObjectId,
+    ref:'Publicacion'
+  }
 })
 
 

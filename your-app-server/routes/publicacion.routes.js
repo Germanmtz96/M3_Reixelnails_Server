@@ -69,7 +69,7 @@ router.get("/:publicacionId", tokenValidation, async (req, res, next) => {
   
   })
 
-// PATCH "/api/publicaciones/:publicacionId" => el usuario actualiza el boton de like
+// PATCH "/api/publicaciones/:publicacionId/likes" => el usuario actualiza el boton de like
 
 router.patch("/:publicacionId/likes", tokenValidation, async (req, res, next) => {
 
@@ -85,6 +85,24 @@ router.patch("/:publicacionId/likes", tokenValidation, async (req, res, next) =>
     }
   
   })
+
+// PATCH "/api/publicaciones/:publicacionId/no_likes" => el usuario actualiza el boton de like
+
+router.patch("/:publicacionId/no_likes", tokenValidation, async (req, res, next) => {
+
+  try {
+    
+    await Publicacion.findByIdAndUpdate(req.params.publicacionId, {
+      $pull: { likes : req.payload._id}
+    }, {new:true})
+    res.sendStatus(202)
+
+  } catch (error) {
+    console.log(error)
+  }
+
+})
+
 
 // PATCH "/api/publicaciones/:publicacionId" => el admin edita el titulo de la publicacion
 

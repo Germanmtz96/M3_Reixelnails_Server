@@ -22,13 +22,13 @@ router.get("/", tokenValidation, async (req, res, next) => {
   
 
 
-// PATCH "/api/users/userId" => el usuario actualiza su tlf en el perfil
+// PATCH "/api/users/:userId/tlf" => el usuario actualiza su tlf en el perfil
 
 router.patch("/:userId/tlf", tokenValidation, async (req, res, next) => {
 
     try {
       
-      const response = await User.findByIdAndUpdate(req.params.userId, {
+      const response = await User.findByIdAndUpdate(req.payload._id, {
         tlf: req.body.tlf
       }, {new:true})
       res.status(200).json(response)
@@ -42,11 +42,11 @@ router.patch("/:userId/tlf", tokenValidation, async (req, res, next) => {
 
 
 
-// DELETE "/api/users/userId" => el usuario borra su cuenta
+// DELETE "/api/users/:userId" => el usuario borra su cuenta
 
 router.delete("/:userId", tokenValidation, async (req, res, next) => {
     try {
-      await User.findByIdAndDelete(req.params.userId)
+      await User.findByIdAndDelete(req.payload._id)
       res.sendStatus(202)
     } catch (error) {
       next(error)
@@ -56,9 +56,16 @@ router.delete("/:userId", tokenValidation, async (req, res, next) => {
 
 //GET "api/users/admin" => el admin ve esta pantalla
 
-router.get("/admin", tokenValidation, adminValidation, (req, res, next) => {
-    console.log("Esta ruta solo es accesible para usuario logeados y de tipo admin")
-  })
+ router.get("/admin", tokenValidation, adminValidation, async (req, res, next) => {
+  try {
+      
+    const response = await User.find()
+    res.json(response)
 
+  } catch (error) {
+    next(error)
+  }
+  })
+ 
 
 module.exports = router
