@@ -6,7 +6,6 @@ function tokenValidation(req, res, next) {
     const token = tokenArr[1]
 
     const payload = jwt.verify(token, process.env.TOKEN_SECRET)
-    // console.log(payload)
 
     req.payload = payload
 

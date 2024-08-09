@@ -7,7 +7,7 @@ const User = require("../models/User.model")
 // GET "/api/users" => el usuario ve su propio perfil
 
 router.get("/", tokenValidation, async (req, res, next) => {
-  
+
     try {
       
       const response = await User.findById(req.payload._id)
@@ -24,7 +24,14 @@ router.get("/", tokenValidation, async (req, res, next) => {
 
 // PATCH "/api/users/:userId/tlf" => el usuario actualiza su tlf en el perfil
 
-router.patch("/:userId/tlf", tokenValidation, async (req, res, next) => {
+router.patch("/propio/tlf", tokenValidation, async (req, res, next) => {
+    const { tlf } = req.body
+    const telefonoRegex = /^\d{9}$/g
+    if(telefonoRegex.test(tlf)=== false){
+      res.status(400).json({errorMessage: "Solo puede tener números y 9 cifras."})
+      return
+    }
+
 
     try {
       

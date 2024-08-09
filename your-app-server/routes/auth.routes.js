@@ -11,10 +11,10 @@ const {tokenValidation} = require("../middlewares/auth.middlewares")
 router.post("/signup", async (req, res, next) => {
 
   console.log(req.body)
-  const { email, username, password ,tlf} = req.body
+  const { email, username, password ,tlf , nombreCompleto } = req.body
 
   // validaciones de backend
-  if (!email || !password || !tlf || !username) {
+  if (!email || !password || !tlf || !username || !nombreCompleto) {
     res.status(400).json({errorMessage: "Todos los campos son obligatorios"})
     return 
   }
@@ -63,7 +63,8 @@ router.post("/signup", async (req, res, next) => {
       email,
       username,
       password: hashPassword,
-      tlf
+      tlf,
+      nombreCompleto
 
     })
 
@@ -106,7 +107,9 @@ router.post("/login", async (req, res, next) => {
       _id: foundUser._id,
       email: foundUser.email,
       username: foundUser.username,
-      role: foundUser.role
+      role: foundUser.role,
+      tlf: foundUser.tlf,
+      nombreCompleto: foundUser.nombreCompleto
     }
 
     const authToken = jwt.sign(

@@ -22,6 +22,10 @@ const userSchema = new Schema(
       type: Number, 
       required: [true, 'El telefono es obligatorio.']
     },
+    nombreCompleto:{
+      type: String,
+      required: [true, 'El nombre es obligatorio.']
+    },
     role: { 
       type: String, 
       enum: ["user", "admin"], 
