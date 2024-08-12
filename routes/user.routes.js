@@ -60,8 +60,17 @@ router.delete("/:userId", tokenValidation, async (req, res, next) => {
     }
   })
 
+// DELETE "/api/users/:userId" => el admin borra cualquier cuenta
+router.delete("/:userId/admin", tokenValidation, adminValidation, async (req, res, next) => {
+  try {
+    await User.findByIdAndDelete(req.params.userId)
+    res.sendStatus(202)
+  } catch (error) {
+    next(error)
+  }
+})
 
-//GET "api/users/admin" => el admin ve esta pantalla
+//GET "api/users/admin" => el admin ve esta pantalla de todos los usuarios
 
  router.get("/admin", tokenValidation, adminValidation, async (req, res, next) => {
   try {

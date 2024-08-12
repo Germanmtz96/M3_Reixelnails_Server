@@ -3,7 +3,19 @@ const {tokenValidation, adminValidation} = require("../middlewares/auth.middlewa
 const Comentario = require("../models/Comentario.model");
 const Publicacion = require("../models/Publicacion.model");
 
-// POST "/api/comentarios" => el usuario crea un comentario
+
+// GET "/api/comentarios/:publicacionId" => el usuario ve los comentario
+router.get("/:publicacionId", tokenValidation, async (req, res, next) => {
+try {
+  const { publicacionId } = req.params
+  const response = await Comentario.find({ publicacion: publicacionId }).populate('publicacion').populate('creator')
+      res.json(response)
+} catch (error) {
+  next(error)
+}
+})
+
+// POST "/api/comentarios/:publicacionId" => el usuario crea un comentario
 
 router.post("/:publicacionId", tokenValidation, async (req, res, next) => {
   
@@ -53,7 +65,7 @@ router.patch("/:comentarioId", tokenValidation, async (req, res, next) => {
         
         })
 
-// DELETE "/api/comentarios/:comentarioId/:publicacionId" => el usuario borra un comentario suyo
+// DELETE "/api/comentarios/:comentarioId" => el usuario borra un comentario suyo
 
 router.delete("/:comentarioId", tokenValidation, async (req, res, next) => {
     try {

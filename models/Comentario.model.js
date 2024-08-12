@@ -1,5 +1,5 @@
 const {Schema, model} = require("mongoose")
-const Publicacion = require("./Publicacion.model")
+
 
 const comentarioSchema = new Schema({
   descripcion: {

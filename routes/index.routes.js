@@ -19,5 +19,8 @@ router.use("/horarios", horarioRouter)
 const publicacionRouter = require("./publicacion.routes.js")
 router.use("/publicaciones", publicacionRouter)
 
+const uploadRoutes = require("./upload.routes")
+router.use("/upload", uploadRoutes)
+
 
 module.exports = router;

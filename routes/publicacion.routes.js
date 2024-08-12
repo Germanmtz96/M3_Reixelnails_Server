@@ -2,6 +2,8 @@ const router = require("express").Router();
 const {tokenValidation, adminValidation} = require("../middlewares/auth.middlewares");
 const Publicacion = require("../models/Publicacion.model")
 
+const uploader = require("../middlewares/cloudinary.config")
+
 // GET "/api/publicaciones" => el usuario ve las publicaciones
 
 router.get("/", async (req, res, next) => {
@@ -21,7 +23,7 @@ router.get("/", async (req, res, next) => {
 
 // POST "/api/publicaciones" => el admin crea una nueva publicacion
 
-router.post("/", tokenValidation, adminValidation, async (req, res, next) => {
+ router.post("/", tokenValidation, adminValidation, async (req, res, next) => {
   
     try {
       
@@ -40,7 +42,7 @@ router.post("/", tokenValidation, adminValidation, async (req, res, next) => {
     }
   
   
-  })
+  }) 
 
 // DELETE "/api/publicaciones/:publicacionId" => el admin elimina una publicacion
 

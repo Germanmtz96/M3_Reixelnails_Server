@@ -72,23 +72,23 @@ Publicacion model
 
 | HTTP Method | URL                             | Request Body                 | Success status | Error Status | Description                                                    |
 | ----------- | ------------------------------- | ---------------------------- | -------------- | ------------ | -------------------------------------------------------------- |
-| GET         | `/api/horario`                  |                              | 200            | 400          | Devuelve un Array de todos los horarios                        |
-| POST        | `/api/horario`                  |{dia, horaStart, servicio}    | 201            | 400          | Crear un nuevo horario                                         |
-| PUT         | `/api/horario/horarioId`        |{dia, horaStart, servicio}    | 200            | 401          | Actualiza todos los datos del horario                          |
-| DELETE      | `/api/horario/horarioId`        |                              | 204            | 400          | Borra un horario                                               |
-| GET         | `/api/publicacion`              |                              | 200            | 400          | Devuelve un Array de Objetos con cada Publicacion              |
-| POST        | `/api/publicacion`              |{titulo,like,comentarios,img} | 201            | 400          | Crear una nueva Publicacion                                    |
-| DELETE      | `/api/publicacion/publicacionId`|                              | 204            | 401          | Borra una Publicación                                          |
-| GET         | `/api/publicacion/publicacionId`|                              | 200            | 400          | Devuelve el Objeto de la Publicacion                           |
-| POST        | `/api/comentario`               |{descripción}                 | 201            | 400          | Crear un nuevo comentario                                      |
-| PATCH       | `/api/comentario/comentarioId`  |{descripción}                 | 200            | 400          | Editar solo la descripción del comentario                      |
-| DELETE      | `/api/comentario/comentarioId`  |                              | 204            | 401          | Borrar un comentario                                           |
-| PATCH       | `/api/publicacion/publicacionId`|{like}                        | 200            | 400          | Editar si le das a like o no                                   |
-| PATCH       | `/api/publicacion/publicacionId`|{titulo}                      | 200            | 400          | Editar el titulo de la Publicacion                             |
+| GET         | `/api/horarios`                  |                              | 200            | 400          | Devuelve un Array de todos los horarios                        |
+| POST        | `/api/horarios`                  |{dia, horaStart, servicio}    | 201            | 400          | Crear un nuevo horario                                         |
+| PUT         | `/api/horarios/:horarioId`        |{dia, horaStart, servicio}    | 200            | 401          | Actualiza todos los datos del horario                          |
+| DELETE      | `/api/horarios/:horarioId`        |                              | 204            | 400          | Borra un horario                                               |
+| GET         | `/api/publicaciones`              |                              | 200            | 400          | Devuelve un Array de Objetos con cada Publicacion              |
+| POST        | `/api/publicaciones`              |{titulo,like,comentarios,img} | 201            | 400          | Crear una nueva Publicacion                                    |
+| DELETE      | `/api/publicaciones/:publicacionId`|                              | 204            | 401          | Borra una Publicación                                          |
+| GET         | `/api/publicaciones/:publicacionId`|                              | 200            | 400          | Devuelve el Objeto de la Publicacion                           |
+| POST        | `/api/comentarios`               |{descripción}                 | 201            | 400          | Crear un nuevo comentario                                      |
+| PATCH       | `/api/comentarios/:comentarioId`  |{descripción}                 | 200            | 400          | Editar solo la descripción del comentario                      |
+| DELETE      | `/api/comentarios/:comentarioId`  |                              | 204            | 401          | Borrar un comentario                                           |
+| PATCH       | `/api/publicaciones/:publicacionId`|{like}                        | 200            | 400          | Editar si le das a like o no                                   |
+| PATCH       | `/api/publicaciones/:publicacionId`|{titulo}                      | 200            | 400          | Editar el titulo de la Publicacion                             |
 | GET         | `/api/users`                    |                              | 200            | 400          | Devuelve un Array con todos los usuarios                       |
 | POST        | `/api/users`                    |{username,email,password,tlf} | 201            | 400          | Crea un nuevo usuario                                          |
-| PATCH       | `/api/users/userId`             |{tlf}                         | 200            | 400          | Edita el telefono de un usuario                                |
-| DELETE      | `/api/users/userId`             |                              | 204            | 400          | Borra un usuario                                               |
+| PATCH       | `/api/users/:userId`             |{tlf}                         | 200            | 400          | Edita el telefono de un usuario                                |
+| DELETE      | `/api/users/:userId`             |                              | 204            | 400          | Borra un usuario                                               |
 | POST        | `/api/auth/signup`              |                              | 204            | 400          | Crea un usuario                                                |
 | POST        | `/api/auth/login`               |                              | 204            | 400          | Autentifica un usuario y da un token                           |
 | GET         | `/api/auth/verify`              |                              | 204            | 400          | Verifica si el token es valido                                 |
