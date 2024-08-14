@@ -8,7 +8,7 @@ router.get("/", tokenValidation, async (req, res, next) => {
   
     try {
         
-        const response = await Horario.find()
+        const response = await Horario.find().populate('cliente')
         res.json(response)
 
     } catch (error) {
@@ -46,7 +46,7 @@ router.patch("/:horarioId", tokenValidation, adminValidation, async (req, res, n
             await Horario.findByIdAndUpdate(req.params.horarioId, {
                 horaStart: req.body.horaStart
             }, {new:true})
-            res.sendStatus(202)
+            
         
           } catch (error) {
             console.log(error)
@@ -77,7 +77,8 @@ router.delete("/:horarioId", tokenValidation, adminValidation, async (req, res, 
         cliente: req.payload._id
 
       })
-      res.status(202).json({ message: "La cita ha sido correctamente agendada."})
+      const horarioInfo = await Horario.findById(req.params.horarioId).populate("cliente")
+      res.status(200).json(horarioInfo)
 
     } catch (error) {
       next(error)

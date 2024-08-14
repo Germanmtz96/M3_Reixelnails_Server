@@ -51,7 +51,7 @@ router.patch("/propio/tlf", tokenValidation, async (req, res, next) => {
 
 // DELETE "/api/users/:userId" => el usuario borra su cuenta
 
-router.delete("/:userId", tokenValidation, async (req, res, next) => {
+router.delete("/", tokenValidation, async (req, res, next) => {
     try {
       await User.findByIdAndDelete(req.payload._id)
       res.sendStatus(202)
