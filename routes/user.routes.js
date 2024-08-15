@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const {tokenValidation, adminValidation} = require("../middlewares/auth.middlewares");
 const User = require("../models/User.model")
-
-
+const Comentario = require("../models/Comentario.model");
+const Publicacion = require("../models/Publicacion.model")
 
 // GET "/api/users" => el usuario ve su propio perfil
 
@@ -52,8 +52,17 @@ router.patch("/propio/tlf", tokenValidation, async (req, res, next) => {
 // DELETE "/api/users/:userId" => el usuario borra su cuenta
 
 router.delete("/", tokenValidation, async (req, res, next) => {
+  const userId = req.payload._id
     try {
-      await User.findByIdAndDelete(req.payload._id)
+      await User.findByIdAndDelete(userId)
+      
+      await Comentario.deleteMany({ creator:userId })
+
+      await Publicacion.updateMany(
+        { likes: { $in: [userId] } },
+        { $pull: { likes: userId } }
+      )
+
       res.sendStatus(202)
     } catch (error) {
       next(error)
@@ -62,9 +71,19 @@ router.delete("/", tokenValidation, async (req, res, next) => {
 
 // DELETE "/api/users/:userId" => el admin borra cualquier cuenta
 router.delete("/:userId/admin", tokenValidation, adminValidation, async (req, res, next) => {
+  const userId = req.params.userId
   try {
-    await User.findByIdAndDelete(req.params.userId)
+    await User.findByIdAndDelete(userId)
+
+    await Comentario.deleteMany({ userId:userId })
+
+    await Publicacion.updateMany(
+      { likes: userId },
+      { $pull: { likes: userId } }
+    );
+ 
     res.sendStatus(202)
+
   } catch (error) {
     next(error)
   }

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {tokenValidation, adminValidation} = require("../middlewares/auth.middlewares");
 const Publicacion = require("../models/Publicacion.model")
 
-const uploader = require("../middlewares/cloudinary.config")
+
 
 // GET "/api/publicaciones" => el usuario ve las publicaciones
 
