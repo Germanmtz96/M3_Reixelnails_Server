@@ -68,8 +68,13 @@ router.patch("/:comentarioId", tokenValidation, async (req, res, next) => {
 // DELETE "/api/comentarios/:comentarioId" => el usuario borra un comentario suyo
 
 router.delete("/:comentarioId", tokenValidation, async (req, res, next) => {
+
+  const {comentarioId} = req.params
+
+  const comentario = await Comentario.findById(comentarioId)
+
     try {
-      if(req.body.creator === req.payload._id || req.payload.role === "admin"){
+      if(comentario.creator.equals(req.payload._id) || req.payload.role === "admin"){
       await Comentario.findByIdAndDelete(req.params.comentarioId)
       
       res.sendStatus(202)
