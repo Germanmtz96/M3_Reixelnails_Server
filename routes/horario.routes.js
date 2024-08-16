@@ -91,8 +91,8 @@ router.delete("/:horarioId", tokenValidation, adminValidation, async (req, res, 
                  font-size:50px;
                  padding:10px;
                  padding-top:60px;">¡Hola ${req.payload.nombreCompleto}!</h1>
-          <p style="padding: 15px;font-size:20px;">¡Gracias por confiar para su ${req.params.horarioId.servicio}! Estamos emocionados de tener la oportunidad de trabajar con usted y hacer todo lo posible para que su experiencia sea excelente.</p>
-          <p style="padding: 15px;font-size:20px;">Su cita es el día ${req.params.horarioId.day} a las ${req.params.horarioId.horaStart}. Recuerde ser puntual. ¡Nos vemos pronto!</p>
+          <p style="padding: 15px;font-size:20px;">¡Gracias por confiar para su ${horarioInfo.servicio}! Estamos emocionados de tener la oportunidad de trabajar con usted y hacer todo lo posible para que su experiencia sea excelente.</p>
+          <p style="padding: 15px;font-size:20px;">Su cita es el día ${horarioInfo.day} a las ${horarioInfo.horaStart}. Recuerde ser puntual. ¡Nos vemos pronto!</p>
           <div>
               <p style="padding: 10px;font-size:20px;">Un saludo,</p>
               <p style="padding-bottom: 10px;font-size:20px;">El equipo de Reixelnails</p>

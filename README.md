@@ -1,25 +1,14 @@
-NOTE: to copy this readme structure simply click on `Raw` on the top right of this gist. There you have the content in the basic [Markdown syntax](https://www.markdownguide.org/basic-syntax/) used in readme files. Then paste it on a README.md file in your repository and fill the information. Always do this directly from VS code, not from github. DON'T ADD THIS NOTE TO YOUR README. Also make sure to remove any notes from this template.
-
 # Reixelnails
 
-## [See the App!](www.your-deploy-url-here.com)
+## [See the App!](https://github.com/Germanmtz96)
 
-![App Logo](your-image-logo-path-or-name)
+![App Logo](https://imgur.com/2WqrE7w)
 
 ## Description
 
-**NOTE -** Describe your project in one/two lines.
-
-#### [Client Repo here](www.your-github-url-here.com)
-#### [Server Repo here](www.your-github-url-here.com)
-
-## Backlog Functionalities
-
-**NOTE -** List here all functionalities you wish to add to your proyect later or that you are currently working on
-
-## Technologies used
-
-**NOTE -** List here all technologies used in the project like HTML, CSS, Javascript, Express, React, axios, React Context etc.
+Un proyecto de página web para un salón de uñas donde los usuarios registrados pueden agendar citas en horarios establecidos por el administrador, interactuar con publicaciones mediante comentarios y "me gusta", y disfrutar de contenido exclusivo, todo gestionado eficientemente por un administrador.
+#### [Client Repo here](https://github.com/Germanmtz96/M3_webnails)
+#### [Server Repo here](https://github.com/Germanmtz96/M3_Reixelnails_Server)
 
 # Server Structure
 
@@ -33,6 +22,7 @@ User model
   email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   tlf: { type: Number, required: true},
+  nombreCompleto:{type: String,required: [true, 'El nombre es obligatorio.']},
   role: { type: String, enum: ["user", "admin"], default "user" }
 }
 ```
@@ -54,6 +44,7 @@ Comentario model
  {
    descripcion: {type: String, required: true},
    creator: {type: Schema.Types.ObjectId,ref:'User'},
+   publicacion : {type: Schema.Types.ObjectId,ref:'Publicacion'}
  }
 ```
 
@@ -63,7 +54,6 @@ Publicacion model
  {
    titulo: {type: String, required: true},
    likes: {type: [Schema.Types.ObjectId], ref:'User'},
-   comentarios: {type: [Schema.Types.ObjectId],ref:'Comentario' },
    imagen :{ type: String, required: true}
  }
 ```
@@ -101,12 +91,12 @@ Publicacion model
 
 ### Project
 
-[Repository Link Client](www.your-github-url-here.com)
+[Repository Link Client](https://github.com/Germanmtz96/M3_webnails)
 
-[Repository Link Server](www.your-github-url-here.com)
+[Repository Link Server](https://github.com/Germanmtz96/M3_Reixelnails_Server)
 
-[Deploy Link](www.your-deploy-url-here.com)
+[Deploy Link](https://reixelnails.netlify.app)
 
 ### Slides
 
-[Slides Link](www.your-slides-url-here.com)
+[Slides Link](https://www.canva.com/design/DAGOAXFj4og/ysvbmpIM6mJZMuEWUzsFKA/view?utm_content=DAGOAXFj4og&utm_campaign=designshare&utm_medium=link&utm_source=editor)
